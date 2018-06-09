@@ -20,7 +20,6 @@ export function handler(event, context, callback) {
         destination = "http://" + destination;
     }
 
-
     request(url, function(err, response, body) {
         // look for this code in our stash
         if (!err && response.statusCode === 200) {
