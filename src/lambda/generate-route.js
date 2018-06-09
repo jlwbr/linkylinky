@@ -9,7 +9,6 @@ export function handler(event, context, callback) {
 
   // Set the root URL according to the Netlify site we are within
   var rootURL =  process.env.URL + "/";
-  var url = "https://api.netlify.com/api/v1/forms/" + process.env.ROUTES_FORM_ID + "/submissions/?access_token=" + process.env.API_AUTH;
 
   // get the details of what we are creating
   var destination = event.queryStringParameters['to'];
