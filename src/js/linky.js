@@ -18,6 +18,7 @@ function eventHandlers() {
 */
 function submitURL() {
   var url = document.querySelector('#destination').value;
+  var code = document.querySelector('#code').value;
   fetch('/.netlify/functions/generate-route?to=' + url + '&to=' + code)
   .then(function(response) { return response.json(); })
   .then(function(data) {
