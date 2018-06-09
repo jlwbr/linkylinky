@@ -59,7 +59,9 @@ export function handler(event, context, callback) {
                             var number = Math.round(new Date().getTime() / 100);
                             var code = hash.encode(number);
                             console.log(code)
-                        }
+                        } else {
+				code = precode;
+			}
                         // prepare a payload to post
                         var payload = {
                             'form-name': "routes",
