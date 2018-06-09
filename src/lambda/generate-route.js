@@ -29,29 +29,29 @@ export function handler(event, context, callback) {
 
 	request(url, function(err, response, body){
 
-	// look for this code in our stash
-	if(!err && response.statusCode === 200){
-	  var routes = JSON.parse(body);
+		// look for this code in our stash
+		if(!err && response.statusCode === 200){
+		  var routes = JSON.parse(body);
 
-	  for(var item in routes) {
-		// return the result when we find the match
-		if(routes[item].data.code == code && routes[item].data.url == destination) {
-		  console.log("We searched for " + code + " and we found " + routes[item].data.destination);
-		  return callback(null, {
-			statusCode: 200,
-			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify({url: rootURL + code})
-		  })
-		} else if(routes[item].data.code == code && routes[item].data.url == !destination) {
-		  console.log("We searched for " + code + " and we found " + routes[item].data.destination);
-		  return callback(null, {
-			statusCode: 200,
-			headers: {"Content-Type": "application/json"},
-			body: JSON.stringify({url: "Error: code already exists!"})
-		  })
+		  for(var item in routes) {
+			// return the result when we find the match
+			if(routes[item].data.code == code && routes[item].data.url == destination) {
+			  console.log("We searched for " + code + " and we found " + routes[item].data.destination);
+			  return callback(null, {
+				statusCode: 200,
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({url: rootURL + code})
+			  })
+			} else if(routes[item].data.code == code && routes[item].data.url == !destination) {
+			  console.log("We searched for " + code + " and we found " + routes[item].data.destination);
+			  return callback(null, {
+				statusCode: 200,
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({url: "Error: code already exists!"})
+			  })
+			}
+		  }
 		}
-	  }
-	}
 	});
   
   // prepare a payload to post
