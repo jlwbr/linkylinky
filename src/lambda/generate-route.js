@@ -9,6 +9,9 @@ export function handler(event, context, callback) {
 
   // Set the root URL according to the Netlify site we are within
   var rootURL =  process.env.URL + "/";
+  
+  // Set the deploy URL
+  var deployURL = process.env.DEPLOY
 
   // get the details of what we are creating
   var destination = event.queryStringParameters['to'];
@@ -31,13 +34,22 @@ export function handler(event, context, callback) {
     'expires': ""
   };
 
-  // post the new route to the Routes form
+  // post the new route to the Routes form and Deploy the site
   request.post({'url': rootURL, 'formData': payload }, function(err, httpResponse, body) {
     var msg;
     if (err) {
       msg = "Post to Routes stash failed: " + err;
     } else {
       msg = "Route registered. Site deploying to include it. " + rootURL + code
+    }
+	console.log(msg);
+	
+  request.post({'url': deployURL }, function(err, httpResponse, body) {
+    var msg;
+    if (err) {
+      msg = "Deploy failed: " + err;
+    } else {
+      msg = "Succesfully deployed site. " + rootURL + code
     }
     console.log(msg);
     // tell the user what their shortcode will be
