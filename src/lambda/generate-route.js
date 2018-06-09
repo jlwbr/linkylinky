@@ -139,7 +139,4 @@ export function handler(event, context, callback) {
     });
 }
 
-// ENHANCEMENT: check for uniqueness of shortcode
-// ENHANCEMENT: let the user provide their own shortcode
-// ENHANCEMENT: dont' duplicate existing routes, return the current one
 // ENHANCEMENT: allow the user to specify how long the redirect should exist for
