@@ -37,7 +37,7 @@ export function handler(event, context, callback) {
 	  for(var item in routes) {
 		// return the result when we find the match
 		if(routes[item].data.code == code && routes[item].data.url == destination) {
-		  console.log("We searched for "  code  " and we found "  routes[item].data.destination);
+		  console.log("We searched for " + code + " and we found "  routes[item].data.destination);
 		  return callback(null, {
 			statusCode: 200,
 			headers: {"Content-Type": "application/json"},
