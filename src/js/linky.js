@@ -19,7 +19,7 @@ function eventHandlers() {
 function submitURL() {
   var url = document.querySelector('#destination').value;
   var code = document.querySelector('#code').value;
-  fetch('/.netlify/functions/generate-route?to=' + url + '&to=' + code)
+  fetch('/.netlify/functions/generate-route?to=' + url + '&code=' + code)
   .then(function(response) { return response.json(); })
   .then(function(data) {
     document.querySelector("#message").innerHTML = `<a href="${data.url}">${data.url}</a>`;
