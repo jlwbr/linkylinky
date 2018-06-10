@@ -4,7 +4,6 @@ var request = require("request");
 var config = require("dotenv").config();
 var Hashids = require("hashids");
 
-
 export function handler(event, context, callback) {
 
     // Set the root URL according to the Netlify site we are within
@@ -15,6 +14,20 @@ export function handler(event, context, callback) {
     // get the details of what we are creating
     var destination = event.queryStringParameters['to'];
     var precode = event.queryStringParameters['code'];
+	
+	if (!destination) {
+		return callback(null, {
+			statusCode: 400,
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				"url": "Error: You must specify a URL"
+			})
+		});
+	}
+	
+	
 
     // ensure that a protocol was provided
     if (destination.indexOf("://") == -1) {
@@ -45,7 +58,7 @@ export function handler(event, context, callback) {
                     } else if (routes[item].data.code == precode) {
                         console.log("We searched for " + precode + " and we found " + routes[item].data.destination);
 						return callback(null, {
-                            statusCode: 200,
+                            statusCode: 409,
                             headers: {
                                 "Content-Type": "application/json"
                             },
